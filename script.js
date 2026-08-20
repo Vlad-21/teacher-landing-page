@@ -21,23 +21,34 @@
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Contact form -> mailto
+  // Contact form -> FormSubmit
   var form = document.getElementById('contact-form');
-  if (form) {
+  var formSuccess = document.getElementById('form-success');
+  if (form && formSuccess) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = form.name.value.trim();
-      var email = form.email.value.trim();
-      var goal = form.goal.value.trim();
+      var btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Надсилаю…';
+      btn.disabled = true;
 
-      var subject = encodeURIComponent('English tutoring inquiry from ' + (name || 'website visitor'));
-      var body = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n\n' +
-        'Message:\n' + (goal || '(no message provided)')
-      );
-
-      window.location.href = 'mailto:viktoriakryshchuk@gmail.com?subject=' + subject + '&body=' + body;
+      fetch('https://formsubmit.co/ajax/viktoriakryshchuk@gmail.com', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      })
+        .then(function (res) {
+          if (res.ok) {
+            form.hidden = true;
+            formSuccess.hidden = false;
+          } else {
+            btn.textContent = 'Спробувати ще раз';
+            btn.disabled = false;
+          }
+        })
+        .catch(function () {
+          btn.textContent = 'Спробувати ще раз';
+          btn.disabled = false;
+        });
     });
   }
 })();

@@ -480,6 +480,13 @@ h2 {
   outline: none;
   border-color: var(--accent-deep);
 }
+.form-success {
+  background: var(--surface);
+  color: var(--text);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  font-weight: 600;
+}
 
 /* ============================================================
    Footer
