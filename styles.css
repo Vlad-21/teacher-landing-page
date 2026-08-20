@@ -173,17 +173,21 @@ h2 {
   gap: var(--space-6);
   align-items: center;
 }
+.hero-copy {
+  container-type: inline-size;
+}
 .eyebrow {
   font-size: 0.9rem;
   color: var(--muted);
   margin-bottom: var(--space-3);
 }
 .hero-title {
-  font-size: clamp(2.75rem, 6vw, 5rem);
-  line-height: 0.98;
+  font-size: clamp(2.1rem, 11cqi, 4.5rem);
+  line-height: 1.02;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  word-break: keep-all;
   overflow-wrap: break-word;
   margin-bottom: var(--space-4);
 }
